@@ -14,8 +14,7 @@ def books():
             cookies=AUTH_USERS_COOKIES[session['email']],
             headers={
                 'Accept': 'application/json; version=5'
-            },
-            timeout=10
+            }
         ).json()
         data = result['objects']
         return render_template('books.html', data=data, name=session['email'], len=len(data))
@@ -34,8 +33,7 @@ def login():
             json={
                 "email": user,
                 "password": request.form['password']
-            },
-            timeout=10
+            }
         )
         if result.status_code != 200:
             flash('Please enter a valid email or password!')
