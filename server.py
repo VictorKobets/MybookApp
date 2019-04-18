@@ -4,13 +4,14 @@ import json
 
 app = Flask(__name__)
 app.secret_key = 'MY SECRET KEY'
+AUTH_USERS_COOKIES = {}
 
 @app.route('/')
 def books():
     if session.get('email', False):
         result = requests.get(
             'https://mybook.ru/api/bookuserlist/',
-            cookies=AUTH_COOKIES[session['email']],
+            cookies=AUTH_USERS_COOKIES[session['email']],
             headers={
                 'Accept': 'application/json; version=5'
                 }
@@ -38,17 +39,17 @@ def login():
             flash('Please enter a valid email or password!')
             return redirect(url_for('login'))
         else:
-            global AUTH_COOKIES
-            AUTH_COOKIES[user] = result.cookies
+            global AUTH_USERS_COOKIES
+            AUTH_USERS_COOKIES[user] = result.cookies
             session['email'] = user
             return redirect(url_for('books'))
 
 
 @app.route('/logout')
 def logout():
+    global AUTH_USERS_COOKIES
+    del AUTH_USERS_COOKIES[session['email']]
     session.pop('email', None)
-    global AUTH_COOKIES
-    AUTH_COOKIES.pop(session['email'], None)
     return redirect(url_for('login'))
 
 
