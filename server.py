@@ -48,7 +48,7 @@ def login():
 @app.route('/logout')
 def logout():
     global AUTH_USERS_COOKIES
-    AUTH_USERS_COOKIES.pop(session['email'], None)
+    AUTH_USERS_COOKIES.pop(session['email'])
     session.pop('email', None)
     return redirect(url_for('login'))
 
