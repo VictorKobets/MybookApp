@@ -10,7 +10,7 @@ def books():
     if session.get('email', False):
         result = requests.get(
             'https://mybook.ru/api/bookuserlist/',
-            cookies=AUTH_COOKIES,
+            cookies=AUTH_COOKIES[session['email']],
             headers={
                 'Accept': 'application/json; version=5'
                 }
@@ -26,10 +26,11 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     else:
+        user = request.form['email']
         result = requests.post(
             'https://mybook.ru/api/auth/',
             json={
-                "email": request.form['email'],
+                "email": user,
                 "password": request.form['password']
             }
         )
@@ -38,14 +39,16 @@ def login():
             return redirect(url_for('login'))
         else:
             global AUTH_COOKIES
-            AUTH_COOKIES = result.cookies
-            session['email'] = request.form['email']
+            AUTH_COOKIES[user] = result.cookies
+            session['email'] = user
             return redirect(url_for('books'))
 
 
 @app.route('/logout')
 def logout():
     session.pop('email', None)
+    global AUTH_COOKIES
+    AUTH_COOKIES.pop(session['email'], None)
     return redirect(url_for('login'))
 
 
