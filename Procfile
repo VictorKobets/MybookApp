@@ -1,1 +1,1 @@
-web: gunicorn MybookApp:app
+web: gunicorn server:app
