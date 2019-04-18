@@ -1,1 +1,1 @@
-web: gunicorn MybookApp.wsgi
+web: gunicorn server.wsgi
