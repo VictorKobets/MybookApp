@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyBooksApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/book.css') }}">
+</head>
+<body>
+<header>
+    <div class="header-button">
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    <div class="header-logo">
+        <p>User: {{ name }}</p>
+    </div>
+</header>
+<table>
+    {% if len != 0 %}
+    {% for book in data %}
+        <tr>
+            <td>
+                <p>
+                    <img src="https://i4.mybook.io/c/256x426/{{ book['book']['default_cover'] }}">
+                </p>
+            </td>
+            <td>
+                <p>{{ book['book']['name'] }}</p>
+                <p>Author: {{ book['book']['authors_names'] }}</p>
+            </td>
+        </tr>
+    {% endfor %}
+    {% else %}
+        <tr>
+            <td>Oooh ... And there are no books :(</td>
+        </tr>
+    {% endif %}
+</table>
+</body>
+</html>

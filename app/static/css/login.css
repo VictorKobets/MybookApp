@@ -1,0 +1,48 @@
+body{
+    background-image: url(images/header.png);
+    background-size: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.div-center{
+    position: absolute;
+    width: 280px;
+    left: 50%;
+    margin-left: -160px;
+    top: 50%;
+    margin-top: -75px;
+}
+form{
+    background-color: #ffe8af;
+    border: 2px solid #ffe8af;
+    box-shadow: 0 0 5px;
+    border-radius: 5px;
+    padding: 12px;
+    height: auto;
+    width: 252px;
+    position: relative;
+}
+h1{
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+input{
+    width: 226px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+}
+button{
+    width: 252px;
+    text-align: center;
+    background-color: #ff8400;
+    border: 1px solid #ff8400;
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+}
